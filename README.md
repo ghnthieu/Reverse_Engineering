@@ -1,4 +1,4 @@
-# Reverse Engineering
+# Reverse Engineering 👾
 
 A collection of my **Reverse Engineering** practice, solutions, and notes while learning cybersecurity.
 
