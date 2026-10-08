@@ -1,0 +1,114 @@
+-Make Flag-
+"#include <bits/stdc++.h>
+using namespace std;
+
+#define fi first
+#define se second
+#define pb pop_back
+#define pub push_back
+#define __Trung_Hieu___ signed main()
+#define TIME (1.0 * clock() / CLOCKS_PER_SEC)
+#define mask(i) (1LL << (i))
+#define bit(n, i) (((n) >> (i)) & 1)
+#define all(v) v.begin(), v.end()
+#define vec(kdl) vector <kdl>
+#define ii(kdl1, kdl2) pair <kdl1, kdl2>
+#define vii(kdl1, kdl2) vector <pair <kdl1, kdl2>>
+#define For(i, l, r, up) for (int i = (l), _r = (r); i <= _r; i += up)
+#define Ford(i, r, l, dw) for (int i = (r), _l = (l); i >= _l; i -= dw)
+#define Rep(i, n) for (int i = 0, _n = (n); i < _n; ++i)
+template <typename T1, typename T2> bool minimize(T1 &a, T2 b) { if (a > b) { a = b; return true; } return false; }
+template <typename T1, typename T2> bool maximize(T1 &a, T2 b) { if (a < b) { a = b; return true; } return false; }
+
+typedef long long ll;
+typedef unsigned long long ull;
+const int MOD = (int) 1e9 + 7;
+const int N = (int) 1e6 + 7;
+
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+//Xử lý UTF-8
+std::vector<uint32_t> decode_utf8(const std::string& raw_bytes) {
+    std::vector<uint32_t> codepoints;
+    size_t i = 0;
+    size_t len = raw_bytes.length();
+
+    while (i < len) {
+        uint8_t c1 = static_cast<uint8_t>(raw_bytes[i]);
+        uint32_t codepoint = 0;
+
+        // Case 1: ASCII (1 byte) - Format: 0xxxxxxx
+        if ((c1 & 0x80) == 0x00) {
+            codepoint = c1;
+            i += 1;
+        }
+        // Case 2: 2 bytes sequence - Format: 110xxxxx 10xxxxxx
+        else if ((c1 & 0xE0) == 0xC0 && i + 1 < len) {
+            uint8_t c2 = static_cast<uint8_t>(raw_bytes[i + 1]);
+            codepoint = ((c1 & 0x1F) << 6) | (c2 & 0x3F);
+            i += 2;
+        }
+        // Case 3: 3 bytes sequence - Format: 1110xxxx 10xxxxxx 10xxxxxx (Chữ Hán/Ký tự Unicode phổ biến)
+        else if ((c1 & 0xF0) == 0xE0 && i + 2 < len) {
+            uint8_t c2 = static_cast<uint8_t>(raw_bytes[i + 1]);
+            uint8_t c3 = static_cast<uint8_t>(raw_bytes[i + 2]);
+            codepoint = ((c1 & 0x0F) << 12) | ((c2 & 0x3F) << 6) | (c3 & 0x3F);
+            i += 3;
+        }
+        // Case 4: 4 bytes sequence - Format: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx (Emoji, ký tự đặc biệt)
+        else if ((c1 & 0xF8) == 0xF0 && i + 3 < len) {
+            uint8_t c2 = static_cast<uint8_t>(raw_bytes[i + 1]);
+            uint8_t c3 = static_cast<uint8_t>(raw_bytes[i + 2]);
+            uint8_t c4 = static_cast<uint8_t>(raw_bytes[i + 3]);
+            codepoint = ((c1 & 0x07) << 18) | ((c2 & 0x3F) << 12) | ((c3 & 0x3F) << 6) | (c4 & 0x3F);
+            i += 4;
+        }
+        // Bỏ qua byte lỗi/không đúng định dạng
+        else {
+            i += 1;
+            continue;
+        }
+
+        codepoints.push_back(codepoint);
+    }
+
+    return codepoints;
+}
+//
+
+__Trung_Hieu___ {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr); cout.tie(nullptr);
+    //freopen(".inp", "r", stdin);
+    //freopen(".out", "w", stdout);
+    freopen("Input.txt", "r", stdin);
+    freopen("Output.txt", "w", stdout);
+    //freopen("TEST.inp", "r", stdin);
+    //freopen("TEST.out", "w", stdout);
+
+    //Đọc File "enc"
+    ifstream file("enc", ios::binary);
+    if (!file.is_open()) return 1;
+    //
+
+    //Giải mã UTF-8, lưu trữ các codepoint vào vector
+    string content((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
+    vector<uint32_t> codepoints = decode_utf8(content);
+    //
+
+    //Xử lý Flag
+    string flag = "";
+    for (uint32_t c : codepoints) {
+        char a = (c >> 8) & 0xFF;
+        char b = c & 0xFF;
+        flag += a;
+        if (b != '\0') flag += b;
+    }
+    cout << "FLAG: " << flag << '\n';
+    //
+
+    cerr << "Time elapsed: " << TIME << " s." << endl;
+    return (0 ^ 0);
+}"
+
+Flag: academy{16_bits_inst34d_of_8_790ba37e}

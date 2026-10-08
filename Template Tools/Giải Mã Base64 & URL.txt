@@ -1,0 +1,13 @@
+import base64
+import urllib.parse
+
+# Chuỗi Expected
+expected = "JTYzJTMwJTZlJTc2JTMzJTcyJTc0JTMxJTZlJTY3JTVmJTY2JTcyJTMwJTZkJTVmJTYyJTYxJTM1JTY1JTVmJTM2JTM0JTVmJTM5JTM1JTMzJTY1JTM5JTMzJTMwJTMx" 
+
+# 1. Giải mã Base64
+base64_decoded = base64.b64decode(expected).decode('utf-8')
+print("[+] Sau khi Base64 Decode:", base64_decoded)
+
+# 2. Giải mã URL (Percent Decoding)
+flag = urllib.parse.unquote(base64_decoded)
+print("[+] FLAG:", flag)

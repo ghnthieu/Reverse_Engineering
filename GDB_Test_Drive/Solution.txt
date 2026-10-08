@@ -1,0 +1,9 @@
+-Make Flag-
+$ chmod +x gdbme
+$ gdb gdbme
+> layout asm
+> break *(main+99) //Vì ở đây có dòng call <sleep@plt>
+> run
+> jump *(main+104) //Đây là dòng lệnh tiếp theo
+
+Flag: academy{d3bugg3r_dr1v3_ff5329f1}
